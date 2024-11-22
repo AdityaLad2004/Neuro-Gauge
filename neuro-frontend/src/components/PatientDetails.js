@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import NavBar from '../components/NavBar';
 
 function PatientDetails() {
   const { id } = useParams();
   const [patient, setPatient] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch(`http://localhost:5000/patients/${id}`)
@@ -108,11 +109,12 @@ function PatientDetails() {
         </div>
 
         <div className='buttonsGroup'>
-          <button className='buttons'>View Reports</button>
-          <button className='buttons'>Prescribe Game</button>
+          <button className='buttons' onClick={()=>navigate(`/viewpre`)}>View Prescription</button>
+          <button className='buttons' onClick={()=>navigate(`/prescribe`)}>Prescribe</button>
           <button className='buttons'>Documents</button>
-          <button className='buttons'>Chat With Parent</button>
-          <button className='buttons'>Past Meet</button>
+          <button className='buttons' onClick={()=>navigate(`/chat`)}>Chat With Parent</button>
+          <button className='buttons' onClick={()=>navigate(`/video`)}>Meet</button>
+          
         </div>
 
       </div>
